@@ -5,7 +5,7 @@
 from typing import Any, Mapping, TypeVar, Union
 
 
-T = TypeVar("T")
+T = TypeVar('T')
 
 
 def safely_get_value(
