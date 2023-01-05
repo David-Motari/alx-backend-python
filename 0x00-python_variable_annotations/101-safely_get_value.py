@@ -8,9 +8,8 @@ from typing import Any, Mapping, TypeVar, Union
 T = TypeVar('T')
 
 
-def safely_get_value(
-    dct: Mapping, key: Any, default: Union[T, Any] = None
-) -> Union[Any, T]:
+def safely_get_value(dct: Mapping, key: Any, default: Union[T, Any] = None
+                     ) -> Union[Any, T]:
     """
     Adding annotation to the function
     """
