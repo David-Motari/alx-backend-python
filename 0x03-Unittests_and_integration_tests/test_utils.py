@@ -4,7 +4,9 @@ test_utils
 """
 from parameterized import parameterized, parameterized_class
 import unittest
-from utils import access_nested_map
+from unittest.mock import patch
+from utils import access_nested_map, get_json, memoize
+import requests
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -32,6 +34,23 @@ class TestAccessNestedMap(unittest.TestCase):
         test missing key
         """
         self.assertRaises(KeyError, access_nested_map, n_map, val_path)
+
+
+class TestGetJson(unittest.TestCase):
+    """
+    tests the get_json methon in utils
+    """
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self, get_url, get_payload):
+        """
+        tests get_json
+        """
+        with patch("requests.get") as mock_reqs:
+            mock_reqs.return_value.json.return_value = get_payload
+            self.assertEqual(get_json(get_url), get_payload)
 
 
 if __name__ == '__main__':
